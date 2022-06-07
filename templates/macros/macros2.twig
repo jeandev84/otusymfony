@@ -1,0 +1,7 @@
+{%  import 'macros.twig' as macros %}
+
+{% macro user_table_body(users) %}
+    {% for user in users %}
+        {{ macros.user_table_row(user) }}
+    {% endfor %}
+{% endmacro %}
