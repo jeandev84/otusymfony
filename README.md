@@ -106,7 +106,7 @@ $ composer require symfony/webpack-encore-bundle
 $ yarn install
 
 Для работы с sass нужно установить загрузчик
-$ yarn add sass-loader@^10.0.0 node-sass --dev
+$ yarn add sass-loader@^10.0.0 node-sass@^6.0.0 --dev
 
 Сборка для dev-окружения
 $ yarn encore dev
