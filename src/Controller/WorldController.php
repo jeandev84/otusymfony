@@ -28,6 +28,19 @@ class WorldController extends AbstractController
     }
 
 
+
+    /**
+     * @return Response
+     */
+    public function helloVue(): Response
+    {
+        return $this->render('user-vue.twig', [
+            'users' => json_encode($this->userManager->getUsersListVue())
+        ]);
+    }
+
+
+
     /**
      * @return Response
     */

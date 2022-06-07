@@ -25,6 +25,8 @@ class UserManager
         ];
     }
 
+
+    // Мы вызваем для каждого пользователя метод toArray()
     public function getUsersListVue(): array
     {
         return array_map(

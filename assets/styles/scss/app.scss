@@ -1,0 +1,8 @@
+//Подключение bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+$color: darkcyan;
+
+body {
+    background-color: $color;
+}

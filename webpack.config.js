@@ -55,8 +55,12 @@ Encore
         config.corejs = 3;
     })
 
-    // enables Sass/SCSS support
+    // enables Sass/SCSS support (Включить SASS)
     //.enableSassLoader()
+
+    // enables Vue support (Включить Vue)
+    //.enableVueLoader()
+
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
