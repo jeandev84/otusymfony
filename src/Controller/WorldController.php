@@ -2,29 +2,27 @@
 namespace App\Controller;
 
 
-use App\Manager\UserManager;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 
-/**
- * @WorldController
-*/
+
 class WorldController extends AbstractController
 {
 
     /**
-     * @var UserManager
+     * @var UserService
     */
-    private UserManager $userManager;
+    private UserService $userService;
 
 
     /**
-     * @param UserManager $userManager
+     * @param UserService $userService
     */
-    public function __construct(UserManager $userManager)
+    public function __construct(UserService $userService)
     {
-        $this->userManager = $userManager;
+        $this->userService = $userService;
     }
 
 
@@ -32,55 +30,51 @@ class WorldController extends AbstractController
     /**
      * @return Response
      */
-    public function helloVue(): Response
-    {
-        return $this->render('user-vue.twig', [
-            'users' => json_encode($this->userManager->getUsersListVue())
-        ]);
-    }
-
-
-
-    /**
-     * @return Response
-    */
     public function hello(): Response
     {
-        return $this->render('user-table.twig', [
-            'users' => $this->userManager->getUserList()
-        ]);
-    }
+        // Создание User
+        $author = $this->userService->create('My User');
 
+        // Создание Tweet
+        $this->userService->postTweet($author, 'The Lord of the Rings');
+        $this->userService->postTweet($author, 'The Hobbit');
+
+        // ID author
+        $authorId = $author->getId();
+
+        // Сбросим Entity Manager
+        $this->userService->clearEntityManager();
+
+
+        // Перезапрошиваем пользователя
+        $author = $this->userService->findUser($authorId);
+
+        return $this->json($author->toArray());
+    }
 
 
     /*
-    public function userTable(): Response
+    public function hello2(): Response
     {
-        return $this->render('user-table.twig', [
-            'users' => $this->userManager->getUserList()
-        ]);
+        // Создание User
+        $author = $this->userService->create('My User');
+
+        // Создание Tweet
+        $this->userService->postTweet($author, 'The Lord of the Rings');
+        $this->userService->postTweet($author, 'The Hobbit');
+
+        // Перезапрошиваем пользователя
+        $author = $this->userService->findUser($author->getId());
+
+        return $this->json($author->toArray());
     }
 
-
-    public function listUsersWithBlock(): Response
+    public function hello1(): Response
     {
-        return $this->render('user/user-content.twig', [
-            'users' => $this->userManager->getUserList()
-        ]);
-    }
+        $user = $this->userService->create('My User');
 
-
-    public function listUsers(): Response
-    {
-        return $this->render('list.twig', [
-            'users' => $this->userManager->getUserList()
-        ]);
-    }
-
-
-    public function helloWorld(): Response
-    {
-        return new Response('<html><body><h1><b>Hello,</b> <i>world</i>!</h1></body></html>');
+        return $this->json($user->toArray());
     }
     */
+
 }

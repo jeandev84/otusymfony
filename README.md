@@ -135,3 +135,14 @@ $ composer require symfony/webpack-encore-bundle
 Если работаем с Докер файлом то необходимо добавить следующую строчку
 ```
 
+Install Doctrine ORM
+```
+$ composer require doctrine/orm
+$ composer require doctrine/doctrine-bundle
+$ composer require doctrine/doctrine-migrations-bundle
+
+$ bin/console doctrine:database:create
+$ bin/console doctrine:migrations:migrate
+```
+
+
