@@ -54,8 +54,11 @@ class UserService
           $tweet->setText($text);
           $tweet->setCreatedAt();
           $tweet->setUpdatedAt();
+          $author->addTweet($tweet);
           $this->em->persist($tweet);
           $this->em->flush();
+
+          //можно добавить $author->addTweet($tweet); после flush()
      }
 
 
@@ -77,5 +80,18 @@ class UserService
           $user = $repository->find($id);
 
           return $user instanceof User ? $user : null;
+     }
+
+
+     /**
+      * @param User $author
+      * @param User $follower
+      * @return void
+     */
+     public function subscribeUser(User $author, User $follower): void
+     {
+          $author->addFollower($follower);
+          $follower->addAuthor($author);
+          $this->em->flush();
      }
 }

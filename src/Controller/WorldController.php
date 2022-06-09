@@ -33,6 +33,32 @@ class WorldController extends AbstractController
     public function hello(): Response
     {
         // Создание User
+        $author = $this->userService->create('J.R.R. Tolkien');
+        $follower = $this->userService->create('Ivan Ivanov');
+        $this->userService->subscribeUser($author, $follower);
+
+
+        return $this->json([$author->toArray(), $follower->toArray()]);
+    }
+
+
+    /*
+    public function hello4(): Response
+    {
+        // Создание User
+        $author = $this->userService->create('My User');
+
+        // Создание Tweet
+        $this->userService->postTweet($author, 'The Lord of the Rings');
+        $this->userService->postTweet($author, 'The Hobbit');
+
+        return $this->json($author->toArray());
+    }
+
+
+    public function hello3(): Response
+    {
+        // Создание User
         $author = $this->userService->create('My User');
 
         // Создание Tweet
@@ -53,7 +79,6 @@ class WorldController extends AbstractController
     }
 
 
-    /*
     public function hello2(): Response
     {
         // Создание User

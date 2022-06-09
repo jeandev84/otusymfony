@@ -51,14 +51,6 @@ class User
         $this->subscriptionFollowers = new ArrayCollection();
     }
 
-    /*
-    public function addTweet(Tweet $tweet): void
-    {
-        if (! $this->tweets->contains($tweet)) {
-            $this->tweets->add($tweet);
-        }
-    }
-    */
 
     public function getId(): int
     {
